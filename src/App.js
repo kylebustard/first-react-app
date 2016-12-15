@@ -8,7 +8,7 @@ class App extends React.Component {
 			cat: 3
 		}
 	}
-	update( e ){
+	update(e){
 		this.setState({txt: e.target.value})
 	}
 	render(){
@@ -16,16 +16,21 @@ class App extends React.Component {
 		let cat = this.props.cat;
 		return (
 			<div>
-			  <input type='text'
-			  onChange={this.update.bind(this)}/>
+		{/* widget with update prop; 
+		child updates parent component */}
+			  <Widget update={this.update.bind(this)} />
 			  <h1>{txt}</h1>
-			{/* text state is changed, not cat */}
+			{/* text state changes, not cat */}
 			  <h2>{this.state.txt} - {this.state.cat}</h2><br/><br/>
 			  <b>The magic number is: {cat}</b><br/><br/>
 			</div>
 		)
 	}
 }
+
+// a stateless function component
+const Widget = (props) =>
+  <input type='text' onChange={props.update}/>
 
 App.propTypes = {
 	txt: React.PropTypes.string,
